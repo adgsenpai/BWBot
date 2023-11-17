@@ -7,14 +7,14 @@ from g4f.Provider import (
     GptGo
 )
 
-st.title("🎮 Gaming Chatbot")
+st.title("Business Warehouse Bot")
 
 if "messages" not in st.session_state:
     st.session_state["messages"] = [
-        {"role": "assistant", "content": "Welcome to the Gaming Chatbot!"}]
+        {"role": "assistant", "content": "Welcome to the Business Warehouse Advise Chatbot!"}]
 
     st.write(
-        'Ask me about video games! I can also recommend games to you. Try asking me "Mario Wonder Reviews" or "What is the best game?"'
+        '- This chatbot can offer advise on how to improve your business.'
     )
 
     st.write(
@@ -24,22 +24,27 @@ if "messages" not in st.session_state:
 for msg in st.session_state.messages:
     st.chat_message(msg["role"]).write(msg["content"])
 
-if prompt := st.chat_input():
+if prompt := st.chat_input():    
     st.session_state.messages.append({"role": "user", "content": prompt})
 
     if prompt == 'help':
         st.write(
             """
-            - Recommend me a game!
-            - What is the best game?
-            - Tell me more about [specific game title].
-            - What are the top-rated RPG games?
-            - Find me a game for Nintendo Switch.
-            - I like action-adventure games, what do you recommend?
-            - Show me user reviews for [game title].
-            - What's the latest news in the gaming industry?
-            - How can I start a career in game development?
-            - I'm having trouble running [game title], can you help?
+            - What are the latest trends in data warehousing?
+            - Can you explain the benefits of cloud-based data warehouses?
+            - I need advice on choosing a data warehouse for a small business.
+            - What are the best practices for data warehouse management?
+            - How can I improve data security in my data warehouse?
+            - Tell me about the challenges in scaling data warehouses.
+            - What tools are recommended for data analytics in large warehouses?
+            - How does data warehousing support business intelligence?
+            - What are the cost implications of data warehouse expansion?
+            - I'm considering a migration to a new data warehouse, what should I consider?
+            - What's the impact of big data on traditional data warehousing?
+            - Can you help me understand data warehouse architecture?
+            - How does data warehousing integrate with IoT devices?
+            - What are some effective data warehousing strategies for e-commerce?
+            - How can I ensure data quality in my data warehouse?
             """
         )
     else:
@@ -55,8 +60,8 @@ if prompt := st.chat_input():
             model="gpt-3.5-turbo",
             provider=g4f.Provider.GptGo,
             messages=[
-                {'role': 'system', 'content': 'You are a gamer.'},
-                {'role': 'system', 'content': 'Your job is to chat to people about video games. You can also recommend games to people.'},
+                {'role': 'system', 'content': 'You are a business advisor. Your job is to advise people on how to improve their business.'},
+                {'role': 'system', 'content': 'You are talking to a small business owner who wants to improve their business.'},
             ] + lastMessages + [{"role": "user", "content": prompt}]
         )
         st.session_state.messages.append(
